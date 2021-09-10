@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/drawable/ic_map_marker.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/drawable/sharp_location_on_24.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/drawable/white_radius.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_place_picker.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_header_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_sheet_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/common_toolbar_back.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_locations.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/list_upcoming.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/location_item.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.16145833333333334" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

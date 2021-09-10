@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="StyleParentButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_2dp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="IconStyle" parent="StyleParentIcon">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="StyleParentIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_2dp</item>
+        <item name="android:padding">@dimen/_2dp</item>
+    </style>
+
+    <style name="MyTextStyle" parent="android:Widget.TextView">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="MyTextStyleThin" parent="android:Widget.TextView">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="MyTextStyleSemiBold" parent="android:Widget.TextView">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>
