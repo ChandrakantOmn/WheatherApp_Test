@@ -10,7 +10,6 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Looper
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
@@ -35,7 +34,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.api.model.RectangularBounds
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -101,7 +99,7 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
         mBtnSearchBar = findViewById(R.id.cvSearchAddress)
         mBtnSearchLocation = findViewById(R.id.img_search)
         mBtnCurrentLocation = findViewById(R.id.ivCurrentLocation)
-        mBtnSelectAddress.setOnClickListener(View.OnClickListener {
+        mBtnSelectAddress.setOnClickListener {
             if (addresses != null) {
                 val addressData = AddressData(latitude, longitude, shortAddress!!, addresses)
                 val returnIntent = Intent()
@@ -123,30 +121,25 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
                     ).show()
                 }
             }
-        })
-        mImgBack.setOnClickListener(View.OnClickListener { finish() })
-        mBtnSearchLocation.setOnClickListener(View.OnClickListener { openAutocompletePicker() })
-        mBtnSearchBar.setOnClickListener(View.OnClickListener {
+        }
+        mImgBack.setOnClickListener { finish() }
+        mBtnSearchLocation.setOnClickListener { openAutocompletePicker() }
+        mBtnSearchBar.setOnClickListener {
             openAutocompletePicker()
-            //                openAutocompletePicker(new LatLng(latitude,longitude),50000);
-        })
+        }
 
-//        mBtnCurrentLocation.setVisibility(View.GONE);
-        mBtnCurrentLocation.setOnClickListener(View.OnClickListener {
+        mBtnCurrentLocation.setOnClickListener {
             if (checkLocationFineAndCoarsePermission(
                     this@PlacePickerActivity
                 )
             ) startLocationUpdates()
-        })
+        }
         setIntentCustomization()
     }
 
     private fun initPlaces() {
         try {
-            // Initialize Places.
-//            Places.initialize(this, getResources().getString(R.string.google_maps_api_key));
             Places.initialize(this, googleMapApiKey!!)
-            // Create a new Places client instance.
             val placesClient = Places.createClient(this)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -199,18 +192,15 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        /*if (PermissionUtility.checkLocationFineAndCoarsePermission(this)) {
-            map.setMyLocationEnabled(true);
-            map.getUiSettings().setMyLocationButtonEnabled(true);
-        }*/map!!.setOnCameraMoveStartedListener {
+        map!!.setOnCameraMoveStartedListener {
             if (markerImage!!.translationY == 0f) {
                 markerImage!!.animate()
                     .translationY(-75f)
                     .setInterpolator(OvershootInterpolator())
                     .setDuration(250)
                     .start()
-                if (bottomSheet!!.isShowing) {
-                    bottomSheet!!.dismissPlaceDetails()
+                if (bottomSheet.isShowing) {
+                    bottomSheet.dismissPlaceDetails()
                 }
             }
         }
@@ -221,7 +211,7 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
                 .setDuration(250)
                 .start()
             if (isSearchFromDropdown) {
-                if (bottomSheet != null) bottomSheet!!.setPlaceDetails(
+                bottomSheet.setPlaceDetails(
                     latitude,
                     longitude,
                     shortAddress!!,
@@ -236,7 +226,7 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
                 AsyncTask.execute {
                     addressForLocation
                     runOnUiThread {
-                        bottomSheet!!.setPlaceDetails(
+                        bottomSheet.setPlaceDetails(
                             latitude,
                             longitude,
                             shortAddress!!,
@@ -323,8 +313,7 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun openAutocompletePicker() {
         try {
-            // Set the fields to specify which types of place data to return.
-            val fields = Arrays.asList(
+            val fields = listOf(
                 Place.Field.ID,
                 Place.Field.NAME,
                 Place.Field.ADDRESS,
@@ -340,7 +329,6 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
                 Place.Field.PLUS_CODE,
                 Place.Field.USER_RATINGS_TOTAL
             )
-            // Start the autocomplete intent.
             val intent = Autocomplete.IntentBuilder(
                 AutocompleteActivityMode.FULLSCREEN, fields
             )
@@ -351,64 +339,6 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun openAutocompletePicker(location: LatLng, mDistanceInMeters: Int) {
-        val latRadian = Math.toRadians(location.latitude)
-        val degLatKm = 110.574235
-        val degLongKm = 110.572833 * Math.cos(latRadian)
-        val deltaLat = mDistanceInMeters / 1000.0 / degLatKm
-        val deltaLong = mDistanceInMeters / 1000.0 / degLongKm
-        val minLat = location.latitude - deltaLat
-        val minLong = location.longitude - deltaLong
-        val maxLat = location.latitude + deltaLat
-        val maxLong = location.longitude + deltaLong
-        Log.d(
-            "Min lat long",
-            "Min: " + java.lang.Double.toString(minLat) + "," + java.lang.Double.toString(minLong)
-        )
-        Log.d(
-            "Max lat long",
-            "Max: " + java.lang.Double.toString(maxLat) + "," + java.lang.Double.toString(maxLong)
-        )
-        val bounds = RectangularBounds.newInstance(
-            LatLng(minLat, minLong),
-            LatLng(maxLat, maxLong)
-        )
-
-        // Set the fields to specify which types of place data to return.
-        val fields = Arrays.asList(
-            Place.Field.ID,
-            Place.Field.NAME,
-            Place.Field.ADDRESS,
-            Place.Field.ADDRESS_COMPONENTS,
-            Place.Field.LAT_LNG,
-            Place.Field.RATING,
-            Place.Field.PHOTO_METADATAS,
-            Place.Field.WEBSITE_URI,
-            Place.Field.VIEWPORT,
-            Place.Field.PRICE_LEVEL,
-            Place.Field.TYPES,
-            Place.Field.OPENING_HOURS,
-            Place.Field.PLUS_CODE,
-            Place.Field.USER_RATINGS_TOTAL
-        )
-        // Start the autocomplete intent.
-        val intent: Intent
-        intent = if (TextUtils.isEmpty(mCountryCode)) {
-            Autocomplete.IntentBuilder(
-                AutocompleteActivityMode.FULLSCREEN, fields
-            )
-                .setLocationRestriction(bounds)
-                .build(this)
-        } else {
-            Autocomplete.IntentBuilder(
-                AutocompleteActivityMode.FULLSCREEN, fields
-            )
-                .setCountry(mCountryCode)
-                .setLocationRestriction(bounds)
-                .build(this)
-        }
-        startActivityForResult(intent, Constants.AUTOCOMPLETE_PLACE_PICKER_REQUEST)
-    }
 
     @SuppressLint("MissingPermission")
     private fun startLocationUpdates() {
@@ -442,7 +372,7 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            Constants.MY_PERMISSIONS_REQUEST_LOCATION -> if (grantResults.size > 0
+            Constants.MY_PERMISSIONS_REQUEST_LOCATION -> if (grantResults.isNotEmpty()
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED
             ) {
                 startLocationUpdates()
