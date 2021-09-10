@@ -6,10 +6,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.csk.wheatherapp.R
@@ -17,15 +17,15 @@ import com.csk.wheatherapp.data.Status
 import com.csk.wheatherapp.databinding.FragmentWeatherBinding
 import com.csk.wheatherapp.ui.adapter.UpcomingAdapter
 import com.csk.wheatherapp.ui.place_picker.models.AddressData
-import com.csk.wheatherapp.utilities.Constants
 import com.csk.wheatherapp.ui.place_picker.utilities.PlacePicker
 import com.csk.wheatherapp.ui.viewmodel.WeatherViewModel
+import com.csk.wheatherapp.utilities.Constants
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class WeatherFragment : Fragment(), View.OnClickListener {
+class WeatherFragment : Fragment() {
     private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
     private val viewModel by sharedViewModel<WeatherViewModel>()
@@ -38,6 +38,16 @@ class WeatherFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        viewModel.hideFab()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         displayReport()
@@ -47,13 +57,11 @@ class WeatherFragment : Fragment(), View.OnClickListener {
         binding.refresh.setOnRefreshListener {
             displayReport()
         }
-
     }
 
     private fun displayReport() {
         displayWeatherReport()
         displayUpcomingWeatherReport()
-        viewModel.listenToFab(this)
         binding.acCity.setText(viewModel.selectedLocation?.cityName)
     }
 
@@ -134,9 +142,6 @@ class WeatherFragment : Fragment(), View.OnClickListener {
         _binding = null
     }
 
-    override fun onClick(p0: View?) {
-        findNavController().navigate(R.id.action_WeatherFragment_to_LocationsFragment)
-    }
 
     private fun requestPlace() {
         val intent = PlacePicker.IntentBuilder()

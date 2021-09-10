@@ -18,4 +18,5 @@
     <dimen name="textsize15sp">15sp</dimen>
     <dimen name="textsize16sp">16sp</dimen>
     <dimen name="dimen4dp">4dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

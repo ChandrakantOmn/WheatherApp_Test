@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_delete.xml" value="0.17760416666666667" />
+        <entry key="app/src/main/res/drawable/ic_help.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/drawable/ic_map_marker.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/drawable/sharp_location_on_24.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/drawable/white_radius.xml" value="0.17760416666666667" />
@@ -14,6 +15,7 @@
         <entry key="app/src/main/res/layout/common_toolbar_back.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_help.xml" value="0.11277173913043478" />
         <entry key="app/src/main/res/layout/fragment_locations.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.1" />
@@ -22,6 +24,7 @@
         <entry key="app/src/main/res/layout/location_item.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.16145833333333334" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.1" />
       </map>
     </option>
   </component>

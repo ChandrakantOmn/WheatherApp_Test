@@ -19,8 +19,13 @@
     <string name="no_address">Not a valid Address</string>
     <string name="search_address">Search Address</string>
     <string name="confirm_address">Confirm Address</string>
-<!--
-    <string name="GOOGLE_MAPS_API_KEY">AIzaSyA8VarYe7j38c5OfjBxiT242tfxYvciC1o</string>
--->
     <string name="GOOGLE_MAPS_API_KEY">AIzaSyCg2i2svdXxFXxYyki_ntGpITWfKeijp9Q</string>
+    <string name="setting_fragment_label">Settings</string>
+    <!-- Preference Titles -->
+    <string name="unit_header">Unit Preference</string>
+
+    <!-- Messages Preferences -->
+    <string name="unit_system_title">Unit System</string>
+    <string name="action_help">Help</string>
+
 </resources>

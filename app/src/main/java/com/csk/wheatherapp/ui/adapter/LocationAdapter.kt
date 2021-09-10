@@ -9,7 +9,7 @@ import com.csk.wheatherapp.databinding.ListItemBinding
 
 
 class LocationAdapter(
-    private val locations: ArrayList<Location>,
+    private val locations: MutableList<Location>,
     private val onItemSelectListener: OnItemSelectListener
 ) :
     RecyclerView.Adapter<LocationAdapter.ViewHolder>() {
@@ -26,7 +26,7 @@ class LocationAdapter(
     }
 
 
-    inner class ViewHolder(val binding: ListItemBinding) :
+    inner class ViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("UseCompatLoadingForDrawables")
         fun bind(item: Location) {

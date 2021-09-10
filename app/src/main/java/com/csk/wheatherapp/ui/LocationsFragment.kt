@@ -10,25 +10,25 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.csk.wheatherapp.utilities.MarginItemDecorationGrid
 import com.csk.wheatherapp.R
 import com.csk.wheatherapp.data.local.entity.Location
 import com.csk.wheatherapp.databinding.FragmentLocationsBinding
 import com.csk.wheatherapp.ui.adapter.LocationAdapter
 import com.csk.wheatherapp.ui.adapter.OnItemSelectListener
 import com.csk.wheatherapp.ui.place_picker.models.AddressData
-import com.csk.wheatherapp.utilities.Constants
-import com.csk.wheatherapp.utilities.Constants.PLACE_PICKER_REQUEST
 import com.csk.wheatherapp.ui.place_picker.utilities.PlacePicker
 import com.csk.wheatherapp.ui.viewmodel.WeatherViewModel
+import com.csk.wheatherapp.utilities.Constants
+import com.csk.wheatherapp.utilities.Constants.PLACE_PICKER_REQUEST
+import com.csk.wheatherapp.utilities.MarginItemDecorationGrid
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class LocationsFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentLocationsBinding? = null
-    private val viewModel by sharedViewModel<WeatherViewModel>()
     private val binding get() = _binding!!
+    private val viewModel by sharedViewModel<WeatherViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +40,12 @@ class LocationsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.showFab()
         viewModel.getLocations().observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 displayLocation(it.reversed())
+            } else {
+                requestPlace()
             }
         })
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
@@ -92,9 +94,9 @@ class LocationsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun displayLocation(exams: List<Location>?) {
-        binding.recyclerView.adapter = exams?.let {
-            LocationAdapter(it as ArrayList<Location>, object : OnItemSelectListener {
+    private fun displayLocation(list: List<Location>) {
+        binding.recyclerView.adapter =
+            LocationAdapter(list.toMutableList(), object : OnItemSelectListener {
                 override fun onItemSelect(location: Location) {
                     viewModel.selectedLocation = location
                     findNavController().navigate(R.id.action_LocationFragment_to_CityFragment)
@@ -104,7 +106,6 @@ class LocationsFragment : Fragment(), View.OnClickListener {
                     viewModel.removeLocation(location)
                 }
             })
-        }
     }
 
     override fun onClick(p0: View?) {

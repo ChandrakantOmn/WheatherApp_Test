@@ -2,6 +2,7 @@ package com.csk.wheatherapp.ui.viewmodel
 
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -20,6 +21,13 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() 
     private var mFab: FloatingActionButton? = null
     var selectedLocation: Location? = null
 
+    fun hideFab() {
+        mFab?.isVisible = false
+    }
+
+    fun showFab() {
+        mFab?.isVisible = true
+    }
 
     fun setFab(fab: FloatingActionButton?) {
         mFab = fab
@@ -79,6 +87,7 @@ class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() 
             repository.removeLocation(location)
         }
     }
+
 }
 
 private fun AddressData.getLocation(): Location {

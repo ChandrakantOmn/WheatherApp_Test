@@ -68,6 +68,7 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mBtnCurrentLocation: ImageView
     private var isSearchFromDropdown = false
     private var googleMapApiKey: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_picker)
@@ -183,10 +184,10 @@ class PlacePickerActivity : AppCompatActivity(), OnMapReadyCallback {
                 ColorStateList.valueOf(ContextCompat.getColor(this, fabColorRes))
         }
         if (primaryTextColorRes != -1) {
-            bottomSheet!!.setPrimaryTextColor(ContextCompat.getColor(this, primaryTextColorRes))
+            bottomSheet.setPrimaryTextColor(ContextCompat.getColor(this, primaryTextColorRes))
         }
         if (secondaryTextColorRes != -1) {
-            bottomSheet!!.setSecondaryTextColor(ContextCompat.getColor(this, secondaryTextColorRes))
+            bottomSheet.setSecondaryTextColor(ContextCompat.getColor(this, secondaryTextColorRes))
         }
     }
 

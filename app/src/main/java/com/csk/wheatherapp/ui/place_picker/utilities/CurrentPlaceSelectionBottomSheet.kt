@@ -114,6 +114,7 @@ class CurrentPlaceSelectionBottomSheet : CoordinatorLayout {
         toggleBottomSheet()
     }
 
+    @SuppressLint("CutPasteId")
     private fun showBottomSheetView() {
         val relativeLayout = rootView!!.findViewById<RelativeLayout>(R.id.bottom_sheet_header)
         val vto = relativeLayout.viewTreeObserver

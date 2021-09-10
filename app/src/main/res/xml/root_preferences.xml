@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/unit_header">
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/unit_entries"
+            app:entryValues="@array/unit_values"
+            app:key="reply"
+            app:title="@string/unit_system_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

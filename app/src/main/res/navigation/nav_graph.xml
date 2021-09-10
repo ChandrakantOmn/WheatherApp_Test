@@ -27,5 +27,44 @@
             android:id="@+id/action_LocationFragment_to_CityFragment"
             app:destination="@id/WeatherFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_location_to_setting"
+            app:destination="@id/SettingFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/LocationsFragment" />
+        <action
+            android:id="@+id/action_open_help_fragment"
+            app:destination="@id/HelpFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/LocationsFragment"
+            app:popUpToInclusive="true" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/SettingFragment"
+        android:name="com.csk.wheatherapp.ui.SettingsFragment"
+        android:label="@string/setting_fragment_label">
+        <action
+            android:id="@+id/action_SettingFragment_to_LocationsFragment"
+            app:destination="@id/LocationsFragment"
+            app:popUpTo="@+id/LocationsFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/HelpFragment"
+        android:name="com.csk.wheatherapp.ui.HelpFragment"
+        android:label="@string/action_help"
+        tools:layout="@layout/fragment_help">
+        <action
+            android:id="@+id/action_HelpFragment_to_LocationsFragment"
+            app:destination="@id/LocationsFragment"
+            app:popUpTo="@+id/LocationsFragment"
+            app:popUpToInclusive="true" />
+
     </fragment>
 </navigation>
